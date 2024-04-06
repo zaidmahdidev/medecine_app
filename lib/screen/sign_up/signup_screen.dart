@@ -66,13 +66,13 @@ class SignUpScreen extends StatelessWidget {
           builder: (context, state) {
             return SafeArea(
                 child: Scaffold(
-              // backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).primaryColor,
               body: ListView(
                 children: [
                   Container(
                     width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: MyTheme.primaryColor,
+                    decoration:  BoxDecoration(
+                      color: Theme.of(context).secondaryHeaderColor,
                     ),
                     child: Column(
                       children: [
@@ -83,8 +83,8 @@ class SignUpScreen extends StatelessWidget {
                               fit: BoxFit.fill),
                         ),
                         Container(
-                          decoration: const BoxDecoration(
-                            color: MyTheme.secondryColor,
+                          decoration:  BoxDecoration(
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(30),
                                 topRight: Radius.circular(30)),
@@ -95,14 +95,7 @@ class SignUpScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('إنشاء حساب ',
-                                    style: MyTheme.textStyle24.copyWith(
-                                        color: MyTheme.primaryColor,
-                                        shadows: const [
-                                          Shadow(
-                                              color: Colors.black,
-                                              offset: Offset(1.5, 1.5),
-                                              blurRadius: 5.5)
-                                        ])),
+                                    style: MyTheme.textStyle24),
                                 const SizedBox(height: 40),
                                 Form(
                                   key: formKey,
@@ -203,10 +196,11 @@ class SignUpScreen extends StatelessWidget {
                                           },
                                           text: 'إنشاء  حساب ',
                                           radius: 10,
+                                          background: Theme.of(context).secondaryHeaderColor,
                                         ),
-                                        fallback: (context) => const Center(
+                                        fallback: (context) =>  Center(
                                             child: SpinKitCubeGrid(
-                                          color: MyTheme.primaryColor,
+                                              color: Theme.of(context).secondaryHeaderColor,
                                           size: 50.0,
                                         )),
                                       ),

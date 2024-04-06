@@ -16,6 +16,7 @@ class Splash_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: AnimatedSplashScreen(
+            backgroundColor: Theme.of(context).primaryColor,
       splash: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -27,14 +28,7 @@ class Splash_Screen extends StatelessWidget {
             ),
           ),
           Text('كشف الأدوية المهربة',
-              style: MyTheme.textStyle24.copyWith(
-                  color: MyTheme.primaryColor,
-                  shadows: const [
-                    Shadow(
-                        color: Colors.black,
-                        offset: Offset(1, 1),
-                        blurRadius: 4.5)
-                  ])),
+              style: MyTheme.textStyle24),
         ],
       ),
       splashIconSize: MediaQuery.of(context).size.height,

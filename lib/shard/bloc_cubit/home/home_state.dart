@@ -16,6 +16,12 @@ class HomeErrorDataState extends HomeState {
   HomeErrorDataState(this.error);
 }
 
+
+///////////////////////// theme //////////////////////
+class ChangeModeState extends HomeState {}
+
+
+
 //////////////////////////  rating  ////////////////////////
 
 class RatingLoadingDataState extends HomeState {}
@@ -26,3 +32,7 @@ class RatingErrorDataState extends HomeState {
   final String error;
   RatingErrorDataState(this.error);
 }
+
+
+////////////////////////
+class UploadProfilePic extends HomeState {}

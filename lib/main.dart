@@ -1,6 +1,7 @@
 import 'package:detection_of_smuggled_medication/screen/splash_screen/splash_screen.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/blocObserver.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_cubit.dart';
+import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_state.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/internet/inernet_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/login/login_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/signup/signup_cubit.dart';
@@ -48,34 +49,29 @@ class MyApp extends StatelessWidget {
           create: (context) => SignUpCubit(),
         ),
       ],
-      child: GetMaterialApp(
-        
-        theme: ThemeData(
-          
-          primaryColor: MyTheme.primaryColor,
-          primarySwatch: primary,
-          secondaryHeaderColor: Colors.cyan,
+      child: BlocConsumer<HomeCubit,HomeState>(
+        builder:(context, state) {
+          return GetMaterialApp(
 
-          appBarTheme: const AppBarTheme(
-            backgroundColor: MyTheme.primaryColor,
-            titleTextStyle: MyTheme.textStyle20,
-            iconTheme: IconThemeData(color: Colors.white),
-          ),
+            themeMode:  HomeCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: darkTheme,
+            theme: lightTheme,
 
-          // fontFamily: 'Jannah'
-          // fontFamily: GoogleFonts.notoKufiArabic().fontFamily
-          fontFamily: GoogleFonts.tajawal().fontFamily,
-        ),
-        title: '',
-        locale: const Locale('ar'),
+            title: '',
+            locale: const Locale('ar'),
 
-        debugShowCheckedModeBanner: false,
-        // home: BlocBuilder<InternetCubit,InternetState>(
-        //   builder: (context, state) => !IS_CONNECTED? const Splash_Screen():const Scaffold(body: Center(child: Text('no Internet '),)),
-        // ),
-        home:  Splash_Screen(login: login),
-        // home: IS_CONNECTED? Splash_Screen():Scaffold()
-      ),
+            debugShowCheckedModeBanner: false,
+            // home: BlocBuilder<InternetCubit,InternetState>(
+            //   builder: (context, state) => !IS_CONNECTED? const Splash_Screen():const Scaffold(body: Center(child: Text('no Internet '),)),
+            // ),
+            home:  Splash_Screen(login: login),
+            // home: IS_CONNECTED? Splash_Screen():Scaffold()
+          );
+        },
+        listener: (context, state) {
+
+        },
+      )
     );
   }
 }

@@ -15,6 +15,7 @@ class CheckModel {
     required this.error
   });
 
+
   factory CheckModel.fromJson(Map<String, dynamic> json) => CheckModel(
         status: json["Status"],
         name: json["name"],

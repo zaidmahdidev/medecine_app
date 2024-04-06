@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme {
   static const primaryColor = Color(0xff28a899);
@@ -41,6 +42,51 @@ class MyTheme {
     fontWeight: FontWeight.bold,
   );
 }
+
+
+
+
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.grey,
+  // canvasColor: Colors.white12,  // هذا فيه حاجات
+  secondaryHeaderColor: Colors.white10,
+
+
+
+
+  appBarTheme: const AppBarTheme(
+    // backgroundColor: MyTheme.primaryColor,
+    titleTextStyle: MyTheme.textStyle15,
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
+
+  // fontFamily: 'Jannah'
+  // fontFamily: GoogleFonts.notoKufiArabic().fontFamily
+  fontFamily: GoogleFonts.tajawal().fontFamily,
+
+);
+
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.white,
+  secondaryHeaderColor: MyTheme.primaryColor,
+  primarySwatch: primary,
+
+  appBarTheme: const AppBarTheme(
+    backgroundColor: MyTheme.primaryColor,
+    titleTextStyle: MyTheme.textStyle20,
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
+
+  // fontFamily: 'Jannah'
+  // fontFamily: GoogleFonts.notoKufiArabic().fontFamily
+  fontFamily: GoogleFonts.tajawal().fontFamily,
+
+);
+
+
+
 
 const MaterialColor primary = MaterialColor(_primaryPrimaryValue, <int, Color>{
   50: Color(0xFFE5F5F3),

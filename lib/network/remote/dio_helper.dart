@@ -54,6 +54,7 @@ class DioHelper {
       ),
     );
 
+
     dio?.interceptors.add(LogInterceptor(
         request: true,
         requestHeader: true,
@@ -62,7 +63,6 @@ class DioHelper {
         responseBody: true,
         error: true));
   }
-
 
 
   static Future<Response<dynamic>> get({

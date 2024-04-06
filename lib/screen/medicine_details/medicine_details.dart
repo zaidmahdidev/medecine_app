@@ -36,15 +36,15 @@ class _MedicineDetailsState extends State<MedicineDetails> {
         }
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white10,
-            elevation: 0,
+
+
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
+              icon:  Icon(
                 Icons.arrow_back_ios_sharp,
-                color: Colors.black,
+                // color: Theme.of(context).secondaryHeaderColor,
               ),
             ),
           ),
@@ -52,12 +52,13 @@ class _MedicineDetailsState extends State<MedicineDetails> {
             children: [
               Container(
                 height: MediaQuery.of(context).size.height * .33,
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 20),
                 width: double.infinity,
                 // child: Image.asset(
                 //   'assets/image/logo.png',
                 // ),
                 child: Image.network(
+                  fit: BoxFit.cover,
                     '${HomeCubit.get(context).checkModel!.imagePath}'
                 ),
               ),
@@ -65,9 +66,9 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                 child: Stack(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(top: 40, right: 14, left: 14),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
+                      padding: const EdgeInsets.only(top: 40, right: 14, left: 14 ),
+                      decoration:  BoxDecoration(
+                        color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -179,7 +180,7 @@ class _MedicineDetailsState extends State<MedicineDetails> {
                         width: 50,
                         height: 5,
                         decoration: BoxDecoration(
-                          color: MyTheme.primaryColor,
+                          color: Theme.of(context).secondaryHeaderColor,
                           borderRadius: BorderRadius.circular(50),
                         ),
                       ),
@@ -191,10 +192,12 @@ class _MedicineDetailsState extends State<MedicineDetails> {
           ),
           bottomNavigationBar: Container(
               height: 70,
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               padding: const EdgeInsets.all(10),
               margin: EdgeInsets.only(bottom: 15),
-              child: defaultButton(fun: () {
+              child: defaultButton(
+                  background:   Theme.of(context).secondaryHeaderColor,
+                  fun: () {
                 HomeCubit.get(context).addRating(stars: ratingValue!.round(), comment: notesController.text);
               }, text: 'موافق', radius: 10)),
         );
@@ -203,3 +206,5 @@ class _MedicineDetailsState extends State<MedicineDetails> {
 
   }
 }
+
+
