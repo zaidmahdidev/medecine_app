@@ -16,7 +16,6 @@ class DioHelper {
     dio = Dio(
       BaseOptions(
         baseUrl: 'http://192.168.43.164:8000/api/',
-        // baseUrl: 'http://he508kf1xfx.sn.mynetname.net:4146/api/',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -29,26 +28,6 @@ class DioHelper {
             CacheHelper.removeData(key: 'token');
             Get.offAll(LoginScreen());
           }
-          if (error.type == DioExceptionType.connectionError) {
-            // ToastManager.showToast('تأكد من الاتصال بالانترنت', ToastStates.ERROR);
-            // CacheHelper.removeData(key: 'token');
-            // Get.offAll(LoginScreen());
-          }
-          if (error.type == DioExceptionType.connectionTimeout) {
-            // ToastManager.showToast('تأكد من الاتصال بالانترنت', ToastStates.ERROR);
-            // Get.back();
-            // throw ServerException(errModel: ErrorModel.fromJson(error.response!.data));
-          } else if (error.type == DioExceptionType.sendTimeout) {
-            // ToastManager.showToast('انتهت فترة الطلب', ToastStates.ERROR);
-            // Get.back();
-            // throw ServerException(errModel: ErrorModel.fromJson(error.response!.data));
-          } else if (error.type == DioExceptionType.receiveTimeout) {
-            // ToastManager.showToast('انتهت فترة الطلب', ToastStates.ERROR);
-            Get.back();
-            throw ServerException(
-                errModel: ErrorModel.fromJson(error.response!.data));
-          } else if (error.type == DioExceptionType.cancel) {}
-
           return handler.next(error);
         },
       ),
@@ -90,8 +69,6 @@ class DioHelper {
     dio!.options.headers = {
       'Accept': 'application/json',
       'Authorization': authorization,
-      // 'content-Type' : 'application/x-www-form-urlencoded'
-      // 'Content-Type' : 'image/jpeg'
     };
       return await dio!.post(
         url,

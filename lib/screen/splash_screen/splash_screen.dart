@@ -32,7 +32,6 @@ class Splash_Screen extends StatelessWidget {
         ],
       ),
       splashIconSize: MediaQuery.of(context).size.height,
-      // nextScreen: Splash_Screen(),
       nextScreen: login == false  ?  LoginScreen() : HomeScreen()
     ));
   }

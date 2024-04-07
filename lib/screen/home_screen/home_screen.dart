@@ -441,12 +441,10 @@
 
 import 'dart:io';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:detection_of_smuggled_medication/screen/medicine_details/medicine_details.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_state.dart';
 import 'package:detection_of_smuggled_medication/shard/components/tools.dart';
-import 'package:detection_of_smuggled_medication/shard/constant/images.dart';
 import 'package:detection_of_smuggled_medication/shard/constant/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -468,6 +466,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 
+
   List<XFile>? selectedImages;
   List<String> imagePaths = [];
   final picker = ImagePicker();
@@ -482,20 +481,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Compress and add new images
         for (var image in newImages) {
-          String compressedImagePath = await compressImage(image, 50); // تعديل الجودة حسب الحاجة
+          String compressedImagePath = await compressImage(image, 50);
           newPaths.add(compressedImagePath);
         }
 
         setState(() {
-          // Filter out already selected images
+          // Initialize the lists if they are null
           selectedImages ??= [];
-          newImages.removeWhere((newImage) => selectedImages!.any((selectedImage) => selectedImage.path == newImage.path));
-          selectedImages!.addAll(newImages);
-
-          // Filter out already selected image paths
           imagePaths ??= [];
-          newPaths.removeWhere((newPath) => imagePaths.contains(newPath));
-          imagePaths.addAll(newPaths);
+
+          // Filter out already selected images and paths
+          for (var i = 0; i < newImages.length; i++) {
+            var newImage = newImages[i];
+            var newPath = newPaths[i];
+            if (!selectedImages!.any((image) => image.path == newImage.path)) {
+              selectedImages!.add(newImage);
+              imagePaths.add(newPath);
+            }
+          }
         });
       } else {
         print('No images selected');
@@ -504,6 +507,7 @@ class _HomeScreenState extends State<HomeScreen> {
       print('Error picking multiple images: $e');
     }
   }
+
 
 
 
@@ -714,6 +718,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // buildAwesomeDialog(context).show();
                           getImage();
                         },
+
                         child: Container(
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
@@ -728,7 +733,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           child: Icon(
-                            Icons.image_outlined,
+                            Icons.add_box,
                             size: 40,
                             color: Colors.white,
                           ),
@@ -751,11 +756,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             }else
                               HomeCubit.get(context)
                                   .checkTheMedicine(images: selectedImages!,);
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => MedicineDetails(),
-                            //     ));
                           },
                           text: 'إفــحـص',
                           radius: 10,
@@ -813,74 +813,4 @@ class _HomeScreenState extends State<HomeScreen> {
     return exitApp ?? false;
   }
 
-  // AwesomeDialog buildAwesomeDialog(BuildContext context) {
-  //   return AwesomeDialog(
-  //       context: context,
-  //       dialogType: DialogType.noHeader,
-  //       body: Container(
-  //         margin: const EdgeInsets.only(bottom: 15, left: 5, right: 5),
-  //         child: Row(
-  //           children: [
-  //             Expanded(
-  //                 child: InkWell(
-  //                   child: Container(
-  //                     padding: const EdgeInsets.all(20),
-  //                     color: Colors.black12,
-  //                     child: Column(
-  //                       children:  [
-  //                         Icon(
-  //                           Icons.camera_alt_outlined,
-  //                           size: 50,
-  //                           color: Theme.of(context).secondaryHeaderColor,
-  //                         ),
-  //                         Text('إلتقاط صوره')
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   onTap: () {
-  //                     getImage(ImageSource.camera);
-  //                     Navigator.pop(context);
-  //                   },
-  //                 )),
-  //             const SizedBox(width: 10),
-  //             Expanded(
-  //                 child: InkWell(
-  //                   child: Container(
-  //                     padding: const EdgeInsets.all(20),
-  //                     color: Colors.black12,
-  //                     child: Column(
-  //                       children:  [
-  //                         Icon(
-  //                           Icons.image_outlined,
-  //                           size: 50,
-  //                           color: Theme.of(context).secondaryHeaderColor,
-  //                         ),
-  //                         Text('معرض الصور')
-  //                       ],
-  //                     ),
-  //                   ),
-  //                   onTap: () {
-  //                     getImage(ImageSource.gallery);
-  //                     Navigator.pop(context);
-  //                   },
-  //                 )),
-  //           ],
-  //         ),
-  //       ));
-  // }
-}
-
-Future<String> compressImage(XFile imageFile, int quality) async {
-  final tempDir = Directory.systemTemp;
-  final tempPath = tempDir.path;
-  final fileName = imageFile.path.split('/').last;
-  final compressedImagePath = '$tempPath/$fileName';
-
-  await FlutterImageCompress.compressAndGetFile(
-    imageFile.path,
-    compressedImagePath,
-    quality: quality,
-  );
-
-  return compressedImagePath;
 }

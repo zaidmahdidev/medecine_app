@@ -4,10 +4,7 @@ import 'package:detection_of_smuggled_medication/screen/sign_up/signup_screen.da
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../network/local/cache_helper.dart';
-import '../../shard/bloc_cubit/internet/inernet_cubit.dart';
-import '../../shard/bloc_cubit/internet/internet_state.dart';
 import '../../shard/bloc_cubit/login/login_cubit.dart';
 import '../../shard/bloc_cubit/login/login_state.dart';
 import '../../shard/components/tools.dart';
@@ -37,8 +34,7 @@ class LoginScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      BlocBuilder<InternetCubit, InternetState>(
-                          builder: (context, state) => HomeScreen()),
+                       HomeScreen(),
                 ),
                 (route) => false);
             token = CacheHelper.getData(key: 'token');
@@ -204,24 +200,3 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class CustomNoInternet extends StatelessWidget {
-  const CustomNoInternet({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Lottie.asset('assets/image/noInternetlotie.json'),
-        const Text(
-          'تاكد من الاتصال بالانترنت',
-          style: MyTheme.textStyle15,
-        )
-      ],
-    )));
-  }
-}

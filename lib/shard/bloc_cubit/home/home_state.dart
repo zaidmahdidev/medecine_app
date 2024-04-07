@@ -32,7 +32,3 @@ class RatingErrorDataState extends HomeState {
   final String error;
   RatingErrorDataState(this.error);
 }
-
-
-////////////////////////
-class UploadProfilePic extends HomeState {}

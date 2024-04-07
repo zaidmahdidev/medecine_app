@@ -2,16 +2,12 @@ import 'package:detection_of_smuggled_medication/screen/splash_screen/splash_scr
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/blocObserver.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/home/home_state.dart';
-import 'package:detection_of_smuggled_medication/shard/bloc_cubit/internet/inernet_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/login/login_cubit.dart';
 import 'package:detection_of_smuggled_medication/shard/bloc_cubit/signup/signup_cubit.dart';
-import 'package:detection_of_smuggled_medication/shard/constant/images.dart';
 import 'package:detection_of_smuggled_medication/shard/constant/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'network/local/cache_helper.dart';
 import 'network/remote/dio_helper.dart';
 
@@ -36,10 +32,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          lazy: false,
-          create: (context) => InternetCubit()..initConnectivity(),
-        ),
-        BlocProvider(
           create: (context) => HomeCubit(),
         ),
         BlocProvider(
@@ -57,7 +49,7 @@ class MyApp extends StatelessWidget {
             darkTheme: darkTheme,
             theme: lightTheme,
 
-            title: '',
+            title: 'كشف الادويه المهربه',
             locale: const Locale('ar'),
 
             debugShowCheckedModeBanner: false,

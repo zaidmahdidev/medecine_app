@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:lottie/lottie.dart';
 import '../../network/local/cache_helper.dart';
-import '../../shard/bloc_cubit/internet/inernet_cubit.dart';
-import '../../shard/bloc_cubit/internet/internet_state.dart';
 import '../../shard/bloc_cubit/signup/signup_cubit.dart';
 import '../../shard/components/tools.dart';
 import '../../shard/constant/images.dart';
@@ -39,8 +37,7 @@ class SignUpScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        BlocBuilder<InternetCubit, InternetState>(
-                            builder: (context, state) => HomeScreen()),
+                         HomeScreen(),
                   ),
                   (route) => false);
               token = CacheHelper.getData(key: 'token');
@@ -125,7 +122,7 @@ class SignUpScreen extends StatelessWidget {
                                         prefixIcon: Icons.person,
                                         valid: (val) {
                                           return validInput(
-                                              val!, 3, 50, "password");
+                                              val!, 3, 50, "username");
                                         },
                                       ),
                                       const SizedBox(height: 5),

@@ -8,7 +8,7 @@ validInput(String val, int min, int max, String type) {
     }
   }
   if (type == "email") {
-    if (!GetUtils.isEmail(val)) {
+    if (GetUtils.isEmail(val)) {
       return "ايميل غير صحيح";
     }
   }
